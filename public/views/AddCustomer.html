@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,800" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/style.css">
+
+    <title>New Customer</title>
+
+</head>
+
+
+<body>
+    <div id="header">
+
+        <div class="wrap">
+            <h2 class="page-title">NEPS Knowledgebase</h2>
+
+            <ul class="sf-menu" id="main-nav">
+                <li>
+                    <a href="/"><img src="../images/home.png" alt="Home" height="30" width="30" /></a>
+                </li>
+                <li>
+                    <a href="/articles"> <img src="../images/articles.png" alt="Articles" height="30" width="30" /></a>
+                </li>
+                <li>
+                    <a href="/post"> <img src="../images/add.png" alt="Add" height="30" width="30" /></a>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <form id="customer-form" onsubmit="return false;">
+        <div class="wrap">
+
+            <div class="content-container">
+
+                <h2>New Customer</h2>
+
+                <!-- action="/articles/post" method="post" -->
+                <div>
+                    <label>Customer Name</label>
+                    <input type="text" name="customer name">
+
+                    <label>ID</label>
+                    <input type="text" name="id">
+
+                    <label>Adress</label>
+                    <input type="text" name="adress">
+                </div>
+
+                <h3 class="customer"><span class="entypo">,</span>Customer</h3>
+
+                <label>Name</label>
+                <input name="name"></input>
+
+                <label>Phone</label>
+                <input name="phone"></input>
+
+                <label>Email</label>
+                <input name="email"></input>
+
+            </div>
+
+
+            <div class="sidebar">
+
+                <div id="add-toolbar" class="btn-group" role="group">
+                    <button id="add" type="submit" class="btn btn-default btn-secondary" name="submit">Save</button>
+                    <button id="view" type="button" class="btn btn-default btn-secondary">View</button>
+                    <button id="cancel" type="button" class="btn btn-default btn-secondary">Cancel</button>
+                </div>
+
+            </div>
+
+        </div>
+    </form>
+    <script src="../scripts/tag.js"></script>
+    <script src="../scripts/pre-upload.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+        var socket = io();
+
+        $('#customer-form').on('submit', function(e) {
+            var customerdata = $("#customer-form").serializeArray();
+            socket.emit('sendcustomer', customerdata);
+        });
+
+        socket.on('receieved', function(data) {
+            var url = ("/articles/" + data.Title + "?id=" + data.ID).replace(/ /g, "-");
+            // Redirect
+            location.href = url;
+        });
+    </script>
+
+
+</body>
+
+</html>

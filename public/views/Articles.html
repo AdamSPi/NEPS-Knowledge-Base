@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+
+	<link href="https://fonts.googleapis.com/css?family=Nunito:300,400,800" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../styles/style.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">-->
+	<style>
+	.tags{
+	    margin-top: 0px !important;
+	}
+	</style>
+	<title>Articles</title>
+
+	<style>
+		.right {
+			position: absolute;
+			right: 50px;
+			width: 300px;
+			border: 3px solid #000000;
+			padding: 10px;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<div id="header">
+
+		<div class="wrap">
+			<h2 class="page-title">NEPS Knowledgebase</h2>
+
+			<ul class="sf-menu" id="main-nav">
+				<li>
+					<a class="lnk" href="/"> <strong> Dashboard </strong>
+						<hr class="link-toolbar"> </a>
+				</li>
+				<li>
+					<a class="lnk" href="/articles"> <strong> Knowledgebase </strong>
+						<hr class="link-toolbar"> </a>
+				</li>
+				<li>
+					<a class="lnk" href="/post"> <strong> Options </strong>
+						<hr class="link-toolbar"> </a>
+				</li>
+			</ul>
+
+		</div>
+	</div>
+
+	<div class="bigsearch">
+		<input type="text" placeholder="Search..." id="searchbar" class="form-control" />
+	</div>
+
+	<div class="wrap">
+		<div class="content-container">
+			<h3 class="article-header"> <img class="img" src="../images/articles.png" height="30" width="30"/> Articles </h3>
+
+			<div class="Table">
+
+				<% data.forEach(function (Articles) { %>
+					<div class="row">
+						<div class="article-title cell">
+							<% var url = "/articles/"+Articles.Title+"?id="+Articles.ID %>
+								<%- link_to(Articles.Title, url.replace(/ /g,"-")) %>
+						</div>
+						<div class="article-user cell">
+							<%= Articles.Customer %>
+						</div>
+						<div class="article-tag cell">
+							<%= Articles.Tags %>
+						</div>
+						<div class="article-time cell">
+							<%= Articles.Time %>
+						</div>
+					</div>
+					<% }) %>
+			</div>
+
+
+			<script src="/socket.io/socket.io.js"></script>
+			<script src="../scripts/realtime.socket.js"></script>
+		</div>
+
+		<div class="sidebar-admin">
+			<h3 class="tags"><span class="entypo">C</span>Tags</h3>
+
+			<ul class="tag-list">
+				<% tagdata.forEach(function (Tags) { %>
+					<div id="my-div">
+						<li>
+							<a href="#">
+								<%= Tags.Text%>
+							</a>
+						</li>
+						<% }) %>
+					</div>
+			</ul>
+
+		</div>
+		<!-- end sidebar -->
+	</div>
+</body>
+
+</html>

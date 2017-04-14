@@ -1,0 +1,865 @@
+@charset "UTF-8";
+
+/* CSS Document */
+
+
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+
+/* HTML5 display-role reset for older browsers */
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+    font-family: 'Nunito', sans-serif;
+    color: #000 !important;
+}
+
+strong {
+    font-weight: bold;
+}
+
+em, i {
+    font-style: italic;
+}
+
+ol, ul {
+    margin-bottom: 10px;
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    font-size: 1em;
+    font-family: 'Nunito', sans-serif;
+    line-height: 150%;
+    padding-top: 0;
+    margin-bottom: 15px;
+}
+
+
+/*** ESSENTIAL STYLES ***/
+
+.sf-menu, .sf-menu * {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sf-menu li {
+    position: relative;
+}
+
+.sf-menu ul {
+    position: absolute;
+    display: none;
+    top: 100%;
+    left: 0;
+    z-index: 99;
+}
+
+.sf-menu>li {
+    float: left;
+}
+
+.sf-menu li:hover>ul, .sf-menu li.sfHover>ul {
+    display: block;
+}
+
+.sf-menu a {
+    display: block;
+    position: relative;
+}
+
+.sf-menu ul ul {
+    top: 0;
+    left: 100%;
+}
+
+
+/*** DEMO SKIN ***/
+
+.sf-menu {
+    float: left;
+    font-size: 10px;
+}
+
+.sf-menu ul {}
+
+.sf-menu a {
+    text-decoration: none;
+    zoom: 1;
+    /* IE7 */
+    color: #333;
+}
+
+.sf-menu a {}
+
+.sf-menu li {
+    white-space: nowrap;
+    /* no need for Supersubs plugin */
+    *white-space: normal;
+    /* ...unless you support IE7 (let it wrap) */
+    -webkit-transition: background .2s;
+    transition: background .2s;
+    line-height: 14px;
+}
+
+.sf-menu li a {
+    display: inline-block;
+    float: left;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: 400;
+    transition: ease-in-out 0.2s all;
+}
+
+.sf-menu-li a img:hover {
+    opacity: 0.5;
+}
+
+.sf-menu ul li {
+    background: #AABDE6;
+}
+
+.sf-menu ul ul li {
+    background: #FFF;
+}
+
+.sf-menu ul {
+    background: #FFF;
+    margin-bottom: 0;
+    margin-top: 0px;
+    padding: 0px;
+    box-shadow: 0px 0px 5px #CCC;
+}
+
+.sf-menu ul li a {
+    color: #000;
+    height: 20px;
+    border: none;
+    padding: 5px 0;
+    width: 100%;
+    text-indent: 10px;
+    font-weight: normal;
+    line-height: 20px;
+    text-align: left;
+    text-transform: none;
+}
+
+.sf-menu ul li a:hover {
+    border: none;
+    background: #ebf4f5;
+    color: #000;
+}
+
+.sf-menu li:hover, .sf-menu li.sfHover {
+    /* only transition out, not in */
+    -webkit-transition: none;
+    transition: none;
+}
+
+
+/*** arrows (for all except IE7) **/
+
+.sf-arrows .sf-with-ul {
+    padding-right: 0.5em;
+    *padding-right: 1em;
+    /* no CSS arrows for IE7 (lack pseudo-elements) */
+}
+
+
+/* styling for both css and generated arrows */
+
+.sf-arrows .sf-with-ul:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 1em;
+    margin-top: -3px;
+    height: 0;
+    width: 0;
+    /* order of following 3 rules important for fallbacks to work */
+    border: 5px solid transparent;
+    border-top-color: #CCC;
+    /* edit this to suit design (no rgba in IE8) */
+}
+
+.sf-arrows>li>.sf-with-ul:focus:after, .sf-arrows>li:hover>.sf-with-ul:after, .sf-arrows>.sfHover>.sf-with-ul:after {
+    border-top-color: white;
+    /* IE8 fallback colour */
+}
+
+
+/* styling for right-facing arrows */
+
+.sf-arrows ul .sf-with-ul:after {
+    margin-top: -5px;
+    margin-right: -3px;
+    border-color: transparent;
+    border-left-color: #dFeEFF;
+    /* edit this to suit design (no rgba in IE8) */
+    border-left-color: rgba(255, 255, 255, .5);
+}
+
+.sf-arrows ul li>.sf-with-ul:focus:after, .sf-arrows ul li:hover>.sf-with-ul:after, .sf-arrows ul .sfHover>.sf-with-ul:after {
+    border-left-color: white;
+}
+
+@font-face {
+    font-family: 'entyporegular';
+    src: url('../fonts/Entypo-webfont.eot');
+    src: url('../fonts/Entypo-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Entypo-webfont.woff') format('woff'), url('../fonts/Entypo-webfont.ttf') format('truetype'), url('../fonts/Entypo-webfont.svg#entyporegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.entypo {
+    font-family: 'entyporegular';
+    font-size: 45px;
+    color: #000;
+    margin-right: 10px;
+    line-height: 100%;
+    font-weight: normal;
+    position: relative;
+    top: 5px;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Nunito', sans-serif;
+}
+
+h1 {
+    font-size: 32px;
+    margin: 10px 0;
+    font-weight: Bold;
+}
+
+h2 {
+    font-size: 28px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 17px !important;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+h4 {
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #666666;
+}
+
+h5 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#groupselection {
+    display: inline;
+}
+
+h2.page-title {
+    font-size: 20px;
+    font-weight: 400;
+    padding: 10px 0;
+    font-weight: bold;
+}
+
+ul {
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+ul li {
+    line-height: 20px;
+}
+
+p {
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    line-height: 24px;
+    padding: 0px 0;
+}
+
+#header {
+    padding: 15px 0;
+    width: 100%;
+}
+
+.wrap {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1000px;
+    min-width: 768px;
+    transition: all 1s ease;
+}
+
+#nav {
+    width: 100%;
+    padding: 0px;
+    display: inline-block;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+
+#main-nav {
+    display: inline-block;
+    float: right;
+    margin-top: -43px;
+}
+
+.search-button {
+    display: inline-block;
+    margin-top: 10px;
+    background: #8dc63f;
+    border-radius: 4px;
+    padding: 10px 30px;
+    text-align: center;
+    color: #FFF;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 1px 0 #3f5c17;
+    text-shadow: 0 -1px 0 #5e8b20;
+}
+
+.search-button:hover {
+    background: #acd373;
+}
+
+.blue {
+    background: #2396dd !important;
+}
+
+.red {
+    background: #CB2629 !important;
+}
+
+label {
+    width: 100%;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+
+input {
+    padding: 10px;
+    font-size: 13px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    width: 100%;
+}
+
+textarea {
+    padding: 10px;
+    font-size: 13px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    width: 100%;
+    max-width: 100%;
+}
+
+#searchbar {
+    border-radius: 15px;
+    width: 40%;
+    margin: auto;
+}
+
+#submit {
+    background: #82bd62;
+    border: none;
+    color: #FFF;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+}
+
+#submit:hover {
+    background: #a7d78e;
+}
+
+.content-editor {
+    height: 200px !important;
+    margin-bottom: 2rem !important;
+    border-radius: 0 0 5px 5px;
+}
+
+.row {
+    width: 100%;
+    display: inline-block;
+}
+
+.column1of2 {
+    width: 48%;
+    padding-right: 2%;
+    float: left;
+}
+
+.column2of2 {
+    width: 48%;
+    padding-left: 2%;
+    float: left;
+}
+
+.column1of3 {
+    width: 31%;
+    padding-right: 3.5%;
+    float: left;
+}
+
+.column2of3 {
+    width: 31%;
+    float: left;
+}
+
+.column3of3 {
+    width: 31%;
+    float: left;
+    padding-left: 3.5%
+}
+
+.content-container {
+    width: 69%;
+    float: left;
+    display: block;
+}
+
+.sidebar {
+    width: 28%;
+    float: right;
+    padding-top: 7.1%;
+    display: block;
+}
+
+.sidebar-post {
+    margin-left: 10px;
+    width: 28%;
+    float: right;
+    display: block;
+}
+
+.sidebar-admin {
+    width: 28%;
+    float: right;
+    display: block;
+}
+
+.sidebar h3, .sidebar-post h3, .comments {
+    padding-bottom: 0px;
+    border-bottom: 2px solid #000;
+    font-size: 20px;
+    margin-top: 50px;
+    line-height: 100%;
+}
+
+ul.tag-list li a {
+    display: inline-block;
+    float: left;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 17px;
+    padding-right: 17px;
+    border: 2px solid #CCC;
+    border-radius: 12px;
+    font-size: 11px;
+    font- margin-right: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000;
+    transition: all 0.5s ease;
+}
+
+ul.tag-list li a:hover {
+    background: #CCC;
+}
+
+.bigsearch {
+    text-align: center;
+    margin: 50px 0;
+}
+
+p.updated {
+    font-size: 1.1em;
+    color: #CCC;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #DDD;
+}
+
+.row {
+    display: table-row;
+}
+
+.cell {
+    display: table-cell;
+    text-align: left;
+    padding-right: 112px;
+}
+
+#upload {
+    float: right;
+    background-color: #FFFFFF;
+}
+
+#attach {
+    position: relative;
+    top: 7px;
+}
+
+#upload-input {
+    display: none;
+}
+
+#progressBar {
+    background-color: #F8B04A;
+    width: 0px;
+    height: 20px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    -moz-transition: .25s ease-out;
+    -webkit-transition: .25s ease-out;
+    -o-transition: .25s ease-out;
+    transition: .25s ease-out;
+}
+
+#attach, #butt {
+    display: inline-block;
+}
+
+#post-title, #editFader {
+    display: inline-block;
+}
+
+#editFader {
+  position: relative;
+  top: 2px;
+  margin-left: 5px;
+}
+
+#save {
+    background-color: #82BD62;
+    width: 150px;
+    color: #FFF;
+    border: none;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+}
+
+#save:hover {
+    background: #a7d78e;
+}
+
+#post-title {
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#post-sym, #post-sum {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#add-toolbar {
+    width: 100%;
+}
+
+#add {
+    background-color: #82BD62;
+    width: 150px;
+    color: #FFF;
+    border: none;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+}
+
+#com-add {
+    background-color: #82BD62;
+    width: 150px;
+    color: #FFF;
+    border: none;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+}
+
+#com-cancel {
+    border-radius: 0px 5px 5px 0px;
+    width: 75px;
+    border: none;
+    transition: all 0.3s ease;
+    color: #afafaf;
+}
+
+#add:hover {
+    background: #a7d78e;
+}
+
+#com-add:hover {
+    background: #a7d78e;
+}
+
+#view, #cancel {
+    border: none;
+    border-radius: 0;
+    transition: all 0.3s ease;
+    color: #afafaf;
+}
+
+#cancel {
+    border-radius: 0px 5px 5px 0px;
+    width: 75px;
+}
+
+.customer {
+    margin-top: 25px !important;
+}
+
+.post-meta {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.post-content {
+    color: #CCC;
+}
+
+.Table {
+    padding-top: 0px;
+    transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+
+.add-tag {
+    text-align: right;
+    clear: both;
+    padding-top: 5px;
+    border-top: .05rem solid #e0e0e0;
+    text-decoration: none !important;
+    transition: all .5s ease;
+}
+
+.add-tag-link {
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: none !important;
+    font-size: 75%;
+    cursor: pointer;
+}
+
+.add-tag-dialogue {
+    margin-top: 0px;
+}
+
+.tag-dialogue-enter, .tag-dialogue-cancel {
+    text-decoration: none !important;
+    font-size: 95%;
+    cursor: pointer;
+}
+
+#tag-header {
+    margin-top: 0px;
+    margin-left: 5px;
+}
+
+#tag-name {
+    border-radius: 3px;
+    height: 6px;
+    width: 60%;
+    margin-bottom: 0px;
+    margin-left: 5px;
+}
+
+.add-attachment {
+    text-align: right;
+    padding-top: 8px;
+    border-top: .05rem solid #e0e0e0;
+    text-decoration: none !important;
+}
+
+.add-attachment-link {
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: none !important;
+    font-size: 75%;
+    cursor: pointer;
+}
+
+.add-com {
+    text-align: right;
+    font-size: 80%;
+    width: 100%;
+    padding-left: 470px;
+    padding-bottom: 10px;
+    text-decoration: none !important;
+}
+
+.add-com-link {
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: none !important;
+    font-size: 75%;
+    cursor: pointer;
+}
+
+.comments, .add-com {
+    display: inline;
+}
+
+#no-coms {
+    padding-top: 5px;
+}
+
+.com-dialogue {
+    height: 200px !important;
+    border-radius: 0 0 5px 5px;
+}
+
+.ql-toolbar {
+    border-radius: 5px 5px 0 0;
+}
+
+.comment-toolbar {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+.img {
+    position: relative;
+    left: -5px;
+}
+
+.article-title {
+    padding-right: 50px;
+}
+
+.article-user {
+    padding-right: 25px;
+}
+
+.article-time {
+    text-align: right;
+    padding-right: 0px;
+}
+
+.post-attachments {
+    margin-top: 15px !important;
+}
+
+.post-customer {
+    margin-top: 0px !important
+}
+
+.tags{
+    margin-top: 40px !important;
+}
+
+.attachments {
+    margin-top: 80px !important;
+}
+
+.tag-item {
+    margin-bottom: 10px;
+}
+
+.img {
+    z-index: 1;
+    position: relative;
+    ;
+    top: 8px;
+}
+
+.article-header {
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+    border-bottom: 2px solid #000;
+    font-size: 17px;
+}
+.content-editor{
+  height: 400px !important;
+  resize: vertical;
+}
+.link-toolbar {
+    background-color: #F8B04A;
+    width: 0%;
+    height: 1px;
+    transition: all 0.3s ease !important;
+}
+
+a:hover .link-toolbar {
+    width: 100%;
+}
+
+.lnk, strong b {
+    font-size: 12px;
+}
+.content{
+    position: relative;
+    left: -20px;
+    padding-top: 20px;
+    padding-right: 12.5px;
+    padding-left: 20px;
+    width:106%;
+    border: 1px solid #DDD;
+    background-color: #FFF;
+    border-radius: 10px;
+}

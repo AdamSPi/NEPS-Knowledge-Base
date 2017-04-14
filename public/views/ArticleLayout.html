@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+<meta charset="UTF-8">
+
+<link href="https://fonts.googleapis.com/css?family=Nunito:300,400,800" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="../styles/style.css" />
+<link href="//cdn.quilljs.com/1.2.3/quill.snow.css" rel="stylesheet">
+
+<!-- Main Quill library -->
+<script src="//cdn.quilljs.com/1.2.3/quill.min.js"></script>
+
+<head>
+	<% if (data[0].Attachments !== null) { %>
+		<% var attached = attachment %>
+			<% } %>
+				<% data.forEach(function (Articles) { %>
+					<title>
+						<%=Articles.Title%>
+					</title>
+					<% }) %>
+						<% data.forEach(function (Articles) { %>
+</head>
+
+<body>
+	<div id="header">
+		<div class="wrap">
+			<h2 class="page-title">NEPS Knowledgebase</h2>
+
+			<ul class="sf-menu" id="main-nav">
+				<li>
+					<a class="lnk" href="/"> <strong> Dashboard </strong>
+						<hr class="link-toolbar"> </a>
+				</li>
+				<li>
+					<a class="lnk" href="/articles"> <strong> Knowledgebase </strong>
+						<hr class="link-toolbar"> </a>
+				</li>
+				<li>
+					<a class="lnk" href="/post"> <strong> Options </strong>
+						<hr class="link-toolbar"> </a>
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	<div class="wrap">
+
+		<div class="content-container">
+
+			<div class="article">
+				<input id="edit-id" type="hidden" name="id" value=< %=A rticles.ID %> >
+				<h2 id="post-title"><%=Articles.Title %></h2>
+				<div id="editFader"> <img src="../images/Edit.png" height="18" width="18"> </div>
+				<p class="post-meta">by
+					<%=Articles.User%> on
+						<%=Articles.Created %>
+				</p>
+				<p class="updated">
+					<font size="3">Updated on 'insert variable' </font>
+				</p>
+
+				<h3 id="post-sym">Symptoms</h3>
+				<div class='symptoms'>
+					<%=Articles.Symptoms %>
+				</div><br />
+
+				<h3 id="post-sum">Summary</h3>
+				<div class='summary'>
+					<%=Articles.Summary %>
+				</div>
+
+				<br><br>
+				<div class='content'>
+					<div id="delta" style="display: none;">
+						<%=Articles.Delta %>
+					</div>
+					<%- Articles.Content %>
+				</div><br />
+
+				<p class="post-content">Insert post content variable tag here.</p>
+
+			</div>
+			<div class="com">
+				<h3 class="comments"><span class="entypo">9</span>Comments
+          <div class="add-com">
+              <a class="add-com-link"> Add New... </a>
+          </div> </h3>
+				<div class="com-body">
+					<ul class="com-list">
+						<li id="no-coms">
+							<font color="#a0a0a0" size="2"> No Comments </font>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<div class="sidebar-post">
+			<h3 class="post-customer customer"><span class="entypo">,</span>Customer</h3>
+			<ul>
+				<li>
+					<%=Articles.Customer %>
+				</li>
+			</ul>
+
+
+			<h3 class="tags"><span class="entypo">C</span>Tags</h3>
+
+			<ul class="tag-list">
+				<% var tagArray = Articles.Tags.split(';') %>
+					<% tagArray.forEach( function(tag) { %>
+						<li>
+							<a href="#">
+								<%= tag %>
+							</a>
+						</li>
+						<%   }) %>
+							<% }) %>
+			</ul>
+
+			<h3 class="attachments"><span class="entypo">'</span>Attachments</h3>
+			<ul>
+				<li>
+					<div id="attach">
+						<ul>
+							<% if (data[0].Attachments !== null) { %>
+								<% attached.forEach(function(file){ %>
+									<li>>
+										<%= file.Name %>
+									</li <% }) %>
+									<% } %>
+						</ul>
+					</div>
+					<!-- id="upload" -->
+				</li>
+			</ul>
+			<input type="file" id="upload-input" name="uploads[]" multiple="multiple" />
+			<div id="progressBar"></div>
+
+
+		</div>
+
+
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="../scripts/upload.js"></script>
+	<script src="../scripts/revise.js"></script>
+	<script src="../scripts/comment.js"></script>
+
+
+</body>
+
+</html>

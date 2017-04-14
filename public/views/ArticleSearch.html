@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<head>
+<meta charset="UTF-8">
+<title>Articles</title>
+</script>
+<% var result = data %>
+</head>
+<center>
+      <div class="wrap">
+          <h2 class="page-title">NEPS Knowledgebase</h2>
+      </div>
+<body>
+  <br />
+  <table >
+          <thead>
+              <tr>
+                  <th>Search results</th>
+              </tr>
+          </thead>
+           <tbody>
+           <% result.forEach(function (Articles) { %>
+              <tr>
+                  <td>
+                    <% if(Articles.ID != -1){ %>
+                    <% var url = "/articles/"+Articles.Title+"?id="+Articles.ID %>
+                    <%- link_to(Articles.Title, url.replace(/ /g,"-")) %>
+                    <% } else {%>
+                    <%= Articles.Title %>
+                    <% } %>
+                  </td>
+              </tr>
+           <% }) %>
+           </tbody>
+      </table>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </body>
+</center>
+</html>
