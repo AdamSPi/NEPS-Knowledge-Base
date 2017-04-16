@@ -34,11 +34,13 @@ $('#article_form').on('submit',function(e) {
   });
   $('#tag-input').val(tagString);
 
-  //TODO: Require ('render-quill') to export delta as html string
+  if (!$("#customer-input").val()) {
+    $("#customer-input").val("n/a");
+  }
+
   var delta = quill.getContents();
   $('.secret-delta').val(JSON.stringify(delta));
   var html = $('.ql-editor').html();
-  console.log(html)
   $('.secret-content').val(html);
 
 

@@ -7,6 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,800" rel="stylesheet">
+    <link rel="icon" href="../images/favicon.ico">
 
     <link href="//cdn.quilljs.com/1.2.3/quill.snow.css" rel="stylesheet">
     <!-- Main Quill library -->
@@ -19,10 +20,10 @@
 </head>
 
 <body>
-    <div id="header">
+    <div id="page-header">
 
         <div class="wrap">
-            <h2 class="page-title">NEPS Knowledgebase</h2>
+            <h2 class="page-title">NEPS Knowledgebase <img class="logo-article" src="../images/favicon.ico" height="35" width="35"/> </h2>
 
             <ul class="sf-menu" id="main-nav">
                 <li>
@@ -34,7 +35,7 @@
                         <hr class="link-toolbar"> </a>
                 </li>
                 <li>
-                    <a class="lnk" href="/post"> <strong> Options </strong>
+                    <a class="lnk" href=""> <strong> Options </strong>
                         <hr class="link-toolbar"> </a>
                 </li>
             </ul>
@@ -79,13 +80,7 @@
 
                 <h3 class="customer"><span class="entypo">,</span>Customer</h3>
                 <div class="add-customer">
-                    <select name="customers" multiple>
-              <% customerdata.forEach(function (Articles) { %>
-            <option><%= Articles.Name %></option>
-                      <% }) %>
-          </select>
-
-                    <a href="/customer" class="add-customer-link"> Add New... </a>
+                    <input id="customer-input" type="hidden" name="customer" />
                 </div>
 
                 <h3 class="post-tags tags"><span class="entypo">C</span>Tags</h3>

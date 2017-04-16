@@ -64,6 +64,7 @@ io.on('connection', function(socket) {
     // Article Socket -----------------------------------------------------------------
     socket.on('send', function(data) {
         // No tags
+        console.log(data);
         if (data[6].value === "") {
             db.run("INSERT INTO Articles (Title, Symptoms, Summary, Created, Content, Delta, Customer, Current) " +
                 "VALUES(?,?,?,datetime('now'),?, ?, ?, 1)",
@@ -269,7 +270,7 @@ app.get('/post', function(request, response) {
 app.get('/articles', function(request, response) {
     var array = [];
     db.all("SELECT *, strftime('%m/%d/%Y %H:%M',Created) Time FROM Articles WHERE " +
-        "(julianday('now') - julianday(Created)) <= 30 AND Current=1 ORDER BY Created DESC LIMIT 4;",
+        "(julianday('now') - julianday(Created)) <= 30 AND Current=1 ORDER BY Created DESC LIMIT 30;",
     function(err, result) {
         if (err) {
             throw err.stack;

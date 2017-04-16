@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="../styles/style.css" />
 <link href="//cdn.quilljs.com/1.2.3/quill.snow.css" rel="stylesheet">
+<link rel="icon" href="../images/favicon.ico">
 
 <!-- Main Quill library -->
 <script src="//cdn.quilljs.com/1.2.3/quill.min.js"></script>
@@ -23,9 +24,9 @@
 </head>
 
 <body>
-	<div id="header">
+	<div id="page-header">
 		<div class="wrap">
-			<h2 class="page-title">NEPS Knowledgebase</h2>
+			<h2 class="page-title">NEPS Knowledgebase <img class="logo-article" src="../images/favicon.ico" height="35" width="35"/> </h2>
 
 			<ul class="sf-menu" id="main-nav">
 				<li>
@@ -37,7 +38,7 @@
 						<hr class="link-toolbar"> </a>
 				</li>
 				<li>
-					<a class="lnk" href="/post"> <strong> Options </strong>
+					<a class="lnk" href=""> <strong> Options </strong>
 						<hr class="link-toolbar"> </a>
 				</li>
 			</ul>
@@ -49,7 +50,7 @@
 		<div class="content-container">
 
 			<div class="article">
-				<input id="edit-id" type="hidden" name="id" value=< %=A rticles.ID %> >
+				<input id="edit-id" type="hidden" name="id" value=<%= Articles.ID %> >
 				<h2 id="post-title"><%=Articles.Title %></h2>
 				<div id="editFader"> <img src="../images/Edit.png" height="18" width="18"> </div>
 				<p class="post-meta">by
@@ -103,7 +104,13 @@
 			<h3 class="post-customer customer"><span class="entypo">,</span>Customer</h3>
 			<ul>
 				<li>
-					<%=Articles.Customer %>
+					<% if (Articles.Customer !== "n/a") { %>
+						<%= Articles.Customer %>
+					<% } else { %>
+					<div style="color:#AAA">
+						<%= 'No customers' %>
+					</div>
+					<% } %>
 				</li>
 			</ul>
 
@@ -111,16 +118,23 @@
 			<h3 class="tags"><span class="entypo">C</span>Tags</h3>
 
 			<ul class="tag-list">
-				<% var tagArray = Articles.Tags.split(';') %>
+				<% if (Articles.Tags !== null) { %>
+					<% var tagArray = Articles.Tags.split(';') %>
 					<% tagArray.forEach( function(tag) { %>
-						<li>
-							<a href="#">
-								<%= tag %>
-							</a>
-						</li>
-						<%   }) %>
-							<% }) %>
+							<li>
+								<a href="#">
+									<%= tag %>
+								</a>
+							</li>
+				 <%  }) %>
 			</ul>
+			<% } else { %>
+				<div style="color:#AAA">
+					<%= 'No tags' %>
+				</div>
+			<% } %>
+
+			<%  }) %>
 
 			<h3 class="attachments"><span class="entypo">'</span>Attachments</h3>
 			<ul>

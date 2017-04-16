@@ -7,6 +7,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Nunito:300,400,800" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../styles/style.css">
+	<link rel="icon" href="../images/favicon.ico">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -34,11 +35,10 @@
 </head>
 
 <body>
-
-	<div id="header">
+	<div id="page-header">
 
 		<div class="wrap">
-			<h2 class="page-title">NEPS Knowledgebase</h2>
+			<h2 class="page-title"> <img class="logo" src="../images/favicon.ico" height="55" width="55"/> NEPS Knowledgebase</h2>
 
 			<ul class="sf-menu" id="main-nav">
 				<li>
@@ -50,7 +50,7 @@
 						<hr class="link-toolbar"> </a>
 				</li>
 				<li>
-					<a class="lnk" href="/post"> <strong> Options </strong>
+					<a class="lnk" href=""> <strong> Options </strong>
 						<hr class="link-toolbar"> </a>
 				</li>
 			</ul>
@@ -64,26 +64,85 @@
 
 	<div class="wrap">
 		<div class="content-container">
-			<h3 class="article-header"> <img class="img" src="../images/articles.png" height="30" width="30"/> Articles </h3>
+			<h3 class="article-header"> <img class="img" src="../images/articles.png" height="30" width="30"/> Articles
+				<div class="add-article">
+					<a class="add-article-link" href="/post"> Add New... </a>
+				</div>
+			</h3>
 
 			<div class="Table">
 
+				<div class="table-spacer"></div>
+				<div class="line">
+					<div class="cell title-header header">
+						<strong>TITLE</strong>
+					</div>
+					<div class="cell customer-header header">
+						<strong>CUSTOMER</strong>
+					</div>
+					<div class="cell tag-header header">
+						<strong>TAGS</strong>
+					</div>
+					<div class="cell date-header header">
+						<strong>CREATED</strong>
+					</div>
+					<div class="cell revised-header header">
+						<strong>REVISED</strong>
+					</div>
+				</div>
+				<div class="header-spacer"></div>
+
 				<% data.forEach(function (Articles) { %>
-					<div class="row">
+					<div class="line">
 						<div class="article-title cell">
 							<% var url = "/articles/"+Articles.Title+"?id="+Articles.ID %>
 								<%- link_to(Articles.Title, url.replace(/ /g,"-")) %>
 						</div>
-						<div class="article-user cell">
-							<%= Articles.Customer %>
+						<div class="article-customer cell">
+							<% if (Articles.Customer !== "n/a") { %>
+								<%= Articles.Customer %>
+							<% } else { %>
+							<div style="color:#AAA">
+								<%= 'n/a' %>
+							</div>
+							<% } %>
 						</div>
 						<div class="article-tag cell">
-							<%= Articles.Tags %>
+							<% if (Articles.Tags !== null) { %>
+								<% var taglist = Articles.Tags.split(';') %>
+								<% var tagstring = "" %>
+								<% taglist.forEach(function(tag){ %>
+								<% tagstring += (tag + ', ') %>
+								<% })  %>
+								<%= tagstring.substring(0, tagstring.length - 2)%>
+							<% } else { %>
+							<div style="color:#AAA">
+								<%= 'n/a' %>
+							</div>
+							<% } %>
 						</div>
-						<div class="article-time cell">
-							<%= Articles.Time %>
+						<div class="article-date cell">
+							<% var dateOnly = Articles.Time.split(' ')[0] %>
+							<% var yearFormat = dateOnly.split('/') %>
+							<% var yy =  yearFormat[2].substr(2, 2) %>
+							<% var finalDateString = yearFormat[0] +'/'+ yearFormat[1] +'/'+ yy %>
+							<%= finalDateString %>
+						</div>
+						<div class="article-revised cell">
+							<% if (Articles.Modified !== null) { %>
+							<% dateOnly = Articles.Modified.split(' ')[0] %>
+							<% yearFormat = dateOnly.split('/') %>
+							<% yy =  yearFormat[2].substr(2, 2) %>
+							<% finalDateString = yearFormat[0] +'/'+ yearFormat[1] +'/'+ yy %>
+							<%= finalDateString %>
+							<% } else { %>
+							<div style="color:#AAA">
+								<%= 'n/a' %>
+							</div>
+							<% } %>
 						</div>
 					</div>
+					<div class="line-spacer"></div>
 					<% }) %>
 			</div>
 

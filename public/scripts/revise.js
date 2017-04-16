@@ -38,9 +38,9 @@ $('#post-title').click(function() {
                     '</div> </form>')
                  .hide();
   $('.article').after(editForm);
-  $('#edit-title').val($('#post-title').html());
-  $('#edit-symptoms').val($('.symptoms').html());
-  $('#edit-summary').val($('.summary').html());
+  $('#edit-title').val($('#post-title').text());
+  $('#edit-symptoms').val($('.symptoms').text().trim());
+  $('#edit-summary').val($('.summary').text().trim());
 
 
   editForm.fadeIn(250);
