@@ -42,7 +42,7 @@ autocomplete.js, so to get it to run on our html page, it's just <script src="..
 
 #### realtime.socket.js
 
-Listens on a websocket for any events that ocuur. On a 'received' event,
+Listens on a websocket for any events. On a 'received' event,
 jQuery is used to append the newly posted article data to the display. Relies on socket.io to function.
 
 ## Built With
