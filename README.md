@@ -24,21 +24,21 @@ The main directory is home to the Web.js file (which holds the node server code)
 public folder is all the fancy client side stuff. The folders inside there are pretty self-explanatory. The
 node_modules folder holds the many dependencies that enables this site to work.
 
-### Client Scripts
+## Client Scripts
 
 In /public/scripts folder there is almost a dozen js files that do important client side stuff. Most of them
 are easy to understand, so I'll explain the complicated ones instead. 
 
-####autocomplete.js 
+###autocomplete.js 
 Holds the code for the search suggestions. It depends on react, babel,
 and jsx to run. Since these are npm modules that can only easily be included on server side code,
 We used browserify to pack their dependencies into the bundle.js file.
 
-####bundle.js
+###bundle.js
 As I said before, bundle.js holds the important dependencies for autocomplete js. It also runs the code in
 autocomplete.js, so to get it to run on our html page, it's just <script src="../scripts/bundle.js"/>
 
-####realtime.socket.js
+###realtime.socket.js
 Listen on a websocket for any events that happen concerning articles that are posted. On a 'received' event,
 jQuery is used to append the newly posted article data to the display. 
 
@@ -61,13 +61,13 @@ jQuery is used to append the newly posted article data to the display.
 
 ## Authors
 
-* **Adam Espinola** - *Initial work* - [PurpleBooth](https://github.com/AdamSPi)
+* **Adam Espinola** - *Initial work* - (https://github.com/AdamSPi)
 
-* **Patrick Kennedy** - *Initial work* - [PurpleBooth](https://github.com/patkenne56)
+* **Patrick Kennedy** - *Initial work* - (https://github.com/patkenne56)
 
 ## Acknowledgments
 
-* John Shumway and Don Tiet for technical/programming help
-* Kyle Wilmarth and Kyle Tavares for front-end expertise and help
-* Dave Martina and Jake Balfour
+* Dave Martina and Jake Balfour - Project Managers
+* John Shumway and Don Tiet - Technical/Programming Advisors
+* Kyle Wilmarth and Kyle Tavares - Front-end/UI Expertise
 
