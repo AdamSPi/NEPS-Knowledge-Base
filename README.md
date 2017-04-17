@@ -2,7 +2,7 @@
 
 Private repo for the KB project. A website like stackoverflow, but for NEPS!
 
-![alt tag](/public/images/favicon.ico)
+![Logo](/public/images/favicon.ico =70x)
 
 <sup>Cool logo I made</sup>
 
