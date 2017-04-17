@@ -1,6 +1,6 @@
 # NEPS Knowledge Base
 
-![alt tag](./public/images/favicon.ico)
+![alt tag](/public/images/favicon.ico)
 <sup>Cool logo I made</sup>
 
 Private repo for the KB project. A website like stackoverflow, but for NEPS!
