@@ -249,10 +249,6 @@ app.post('/upload', function(request, response) {
     form.parse(request);
 });
 
-app.get('/', function(request, response) {
-    response.render('KBSkeleton.html');
-});
-
 app.get('/customer', function(request, response) {
     response.render('AddCustomer.html');
 });
@@ -267,7 +263,7 @@ app.get('/post', function(request, response) {
     });
 });
 
-app.get('/articles', function(request, response) {
+app.get('/', function(request, response) {
     var array = [];
     db.all("SELECT *, strftime('%m/%d/%Y %H:%M',Created) Time FROM Articles WHERE " +
         "(julianday('now') - julianday(Created)) <= 30 AND Current=1 ORDER BY Created DESC LIMIT 30;",
@@ -288,6 +284,16 @@ app.get('/articles', function(request, response) {
             });
         }
     });
+});
+
+// auto complete query
+app.get('/all', function(request, response) {
+  db.all('SELECT Title FROM Articles', function(err, result){
+    if(err){
+      throw err.stack;
+    }
+    response.send(result);
+  });
 });
 
 app.get('/articles/:title', function(request, response) {

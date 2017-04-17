@@ -501,6 +501,8 @@ ul.tag-list li a {
     padding-right: 17px;
     border: 2px solid #CCC;
     border-radius: 12px;
+    margin-bottom: 2px;
+    margin-right: 1px;
     font-size: 11px;
     font- margin-right: 5px;
     font-weight: bold;
@@ -949,11 +951,29 @@ a:hover .link-toolbar {
 }
 
 .logo-article {
-  position: relative;
-  top: 12px;
-  margin-left: 5px;
+    position: relative;
+    top: 12px;
+    margin-left: 5px;
 }
 
 #page-header {
-  margin-bottom: 30px;
+    margin-bottom: 30px;
+}
+
+#app {
+    width: 45%;
+    margin: 0 auto;
+}
+
+#app > div > div > div {
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: bold;
+    font-size: 14px !important;
+}
+
+#react-item {
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    color: #AAA !important;
 }

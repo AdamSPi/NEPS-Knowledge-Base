@@ -34,7 +34,7 @@
 						<hr class="link-toolbar"> </a>
 				</li>
 				<li>
-					<a class="lnk" href="/articles"> <strong> Knowledgebase </strong>
+					<a class="lnk" href="/"> <strong> Knowledgebase </strong>
 						<hr class="link-toolbar"> </a>
 				</li>
 				<li>
@@ -118,21 +118,21 @@
 			<h3 class="tags"><span class="entypo">C</span>Tags</h3>
 
 			<ul class="tag-list">
+				<li>
 				<% if (Articles.Tags !== null) { %>
 					<% var tagArray = Articles.Tags.split(';') %>
 					<% tagArray.forEach( function(tag) { %>
-							<li>
-								<a href="#">
-									<%= tag %>
-								</a>
-							</li>
+					<a href="#">
+						<%= tag %>
+					</a>
 				 <%  }) %>
-			</ul>
 			<% } else { %>
-				<div style="color:#AAA">
-					<%= 'No tags' %>
-				</div>
+					<div style="color:#AAA">
+						<%= 'No tags' %>
+					</div>
+				</li>
 			<% } %>
+			</ul>
 
 			<%  }) %>
 
