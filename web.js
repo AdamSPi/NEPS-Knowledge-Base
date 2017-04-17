@@ -288,6 +288,7 @@ app.get('/', function(request, response) {
 
 // auto complete query
 app.get('/all', function(request, response) {
+  // TODO: SELECT ALL FROM EVERY OTHER TABLE TOO
   db.all('SELECT Title FROM Articles', function(err, result){
     if(err){
       throw err.stack;
