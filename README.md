@@ -2,7 +2,7 @@
 
 Private repo for the KB project. A website like stackoverflow, but for NEPS!
 
-<img src="/public/images/favicon.ico" width="100" height="100" />
+<img src="test.png" width="100" height="100" />
 
 <sup>Cool logo I made</sup>
 
