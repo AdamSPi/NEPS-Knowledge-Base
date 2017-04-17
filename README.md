@@ -17,6 +17,15 @@ You need NodeJs and npm installed to setup and compile the code.
 
 Unzip folder.
 
+## Acknowledgments
+
+* Dave Martina and Jake Balfour - Project Managers
+* John Shumway and Don Tiet - Technical/Programming Advisors
+* Kyle Wilmarth and Kyle Tavares - Front-end/UI Expertise
+
+# Important Dev stuff
+### if you aren't a dev, you won't understand any of this ↓
+
 ## Directory structure
 
 The main directory is home to the Web.js file (which holds the node server code), .babelrc and .jshintrc
@@ -62,16 +71,30 @@ jQuery is used to append the newly posted article data to the display. Relies on
 * [Atom](https://atom.io/) - Text Editor/IDE used for development
 * [Socket.io](https://socket.io/) - Used for websocket code
 
+### Important Commands
+
+* npm start 
+    - starts the server (duh)
+* browserify ./public/scripts/autocomplete.js > ./public/scripts/bundle.js 
+    - finds all dependencies for autocomplete and puts them bundle.js along with the autocomplete.js source code
+
+### Important files - don't delete these
+* .babelrc
+    - tells babel (a compiler for js) what presets/plugins the code is using in order to compile
+* package.json
+    - tells npm our dependencies, and tells browserify our babel plugins in order to link our modules.
+* db.sqlite
+    - the database, you can open it with SQLite Manager
+* Web.js
+    - the server code, a huge mess of callbacks
+
+### Not-so Important files - delete these if you want idc
+* jshintrc
+    - only need this if you're using atom
 
 ## Authors
 
-* **Adam Espinola** - *Initial work* - (https://github.com/AdamSPi)
+* **Adam Espinola** - *Initial Server Programmer* - (https://github.com/AdamSPi)
 
-* **Patrick Kennedy** - *Initial work* - (https://github.com/patkenne56)
-
-## Acknowledgments
-
-* Dave Martina and Jake Balfour - Project Managers
-* John Shumway and Don Tiet - Technical/Programming Advisors
-* Kyle Wilmarth and Kyle Tavares - Front-end/UI Expertise
+* **Patrick Kennedy** - *Initial Client Programmer* - (https://github.com/patkenne56)
 
