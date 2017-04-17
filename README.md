@@ -1,5 +1,8 @@
 # NEPS Knowledge Base
 
+![alt tag](./public/images/favicon.ico)
+<sup>Cool logo I made</sup>
+
 Private repo for the KB project. A website like stackoverflow, but for NEPS!
 
 ## Getting Started
@@ -94,7 +97,7 @@ jQuery is used to append the newly posted article data to the display. Relies on
 
 ## Authors
 
-* **Adam Espinola** - *Initial Server Programmer* - (https://github.com/AdamSPi)
+* **Adam Espinola** - *Initial Server Programmer* - (adamsp123@gmail.com)
 
-* **Patrick Kennedy** - *Initial Client Programmer* - (https://github.com/patkenne56)
+* **Patrick Kennedy** - *Initial Client Programmer* - (patchkennedy56@gmail.com)
 
