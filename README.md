@@ -28,8 +28,7 @@ Unzip folder.
 * John Shumway and Don Tiet - Technical/Programming Advisors
 * Kyle Wilmarth and Kyle Tavares - Front-end/UI Expertise
 
-# Important Dev stuff
-### if you aren't a dev, you won't understand any of this ↓
+# Important Dev stuff ↓
 
 ## Directory structure
 

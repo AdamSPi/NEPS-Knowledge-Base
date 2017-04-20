@@ -898,7 +898,7 @@ p.updated {
 .link-toolbar {
     background-color: #FF9A44;
     width: 0%;
-    height: .5px;
+    height: 1px;
     transition: all 0.3s ease !important;
 }
 
