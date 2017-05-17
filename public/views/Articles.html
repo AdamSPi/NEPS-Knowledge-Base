@@ -59,7 +59,11 @@
 	</div>
 
 	<div class="bigsearch">
-		<div id="app"></div>
+			<div id="app">
+      </div>
+			<div id="appcpy">
+	        <img class="search_img" src="../images/search.ico" />
+			</div>
 	</div>
 
 	<div class="wrap">
@@ -91,16 +95,20 @@
 					</div>
 				</div>
 				<div class="header-spacer"></div>
-
+				<div class="article-holder">
 				<% data.forEach(function (Articles) { %>
 					<div class="line">
 						<div class="article-title cell">
-							<% var url = "/articles/"+Articles.Title+"?id="+Articles.ID %>
+							<% var url = "/articles/"+Articles.Title.replace(/\?/g, "")+"?id="+Articles.ID %>
 								<%- link_to(Articles.Title, url.replace(/ /g,"-")) %>
 						</div>
 						<div class="article-customer cell">
 							<% if (Articles.Customer !== "n/a") { %>
-								<%= Articles.Customer %>
+								<% customerdata.forEach(function (customer){ %>
+									<% if(customer.ID == Articles.Customer){ %>
+										<%= customer.Name %>
+									<% } %>
+								<% }) %>
 							<% } else { %>
 							<div style="color:#AAA">
 								<%= 'n/a' %>
@@ -108,7 +116,7 @@
 							<% } %>
 						</div>
 						<div class="article-tag cell">
-							<% if (Articles.Tags !== null) { %>
+							<% if (Articles.Tags !== null && Articles.Tags !== '') { %>
 								<% var taglist = Articles.Tags.split(';') %>
 								<% var tagstring = "" %>
 								<% taglist.forEach(function(tag){ %>
@@ -123,17 +131,29 @@
 						</div>
 						<div class="article-date cell">
 							<% var dateOnly = Articles.Time.split(' ')[0] %>
+							<% var timeOnly = Articles.Time.split(' ')[1] %>
+		          <% var timeFormat = timeOnly.split(':') %>
 							<% var yearFormat = dateOnly.split('/') %>
 							<% var yy =  yearFormat[2].substr(2, 2) %>
 							<% var finalDateString = yearFormat[0] +'/'+ yearFormat[1] +'/'+ yy %>
+	            <% if(timeFormat[0] >= 0 && timeFormat[0] < 4){ %>
+	             <% var date = parseInt(yearFormat[1])-1 %>
+	             <% finalDateString = yearFormat[0] +'/'+ date +'/'+ yy %>
+	            <% } %>
 							<%= finalDateString %>
 						</div>
 						<div class="article-revised cell">
-							<% if (Articles.Modified !== null) { %>
-							<% dateOnly = Articles.Modified.split(' ')[0] %>
+							<% if (Articles.Updated !== null) { %>
+							<% dateOnly = Articles.Updated.split(' ')[0] %>
+							<% var timeOnly = Articles.Updated.split(' ')[1] %>
+		          <% var timeFormat = timeOnly.split(':') %>
 							<% yearFormat = dateOnly.split('/') %>
 							<% yy =  yearFormat[2].substr(2, 2) %>
 							<% finalDateString = yearFormat[0] +'/'+ yearFormat[1] +'/'+ yy %>
+							<% if(timeFormat[0] >= 0 && timeFormat[0] < 4){ %>
+	             <% var date = parseInt(yearFormat[1])-1 %>
+	             <% finalDateString = yearFormat[0] +'/'+ date +'/'+ yy %>
+	            <% } %>
 							<%= finalDateString %>
 							<% } else { %>
 							<div style="color:#AAA">
@@ -145,15 +165,21 @@
 					<div class="line-spacer"></div>
 					<% }) %>
 			</div>
+			<div id="loader" style="display: none;"> </div>
+			<div id="failer" style="display: none;"> No Articles found...</div>
+			</div>
 
 
 			<script src="/socket.io/socket.io.js"></script>
-			<script src="../scripts/realtime.socket.js"></script>
-			<script src="../scripts/bundle.js"></script>
+			<script src="../scripts/socket.js"></script>
+			<script src="../scripts/bundle-autocomplete.js"></script>
+			<script src="../scripts/search.js"></script>
+			<script src="../scripts/bundle-search-react.js"></script>
+
 		</div>
 
 		<div class="sidebar-admin">
-			<h3 class="tags"><span class="entypo">C</span>Tags</h3>
+			<h3 class="tags"><span class="entypo">C</span>Popular Tags</h3>
 
 			<ul class="tag-list">
 				<% tagdata.forEach(function (Tags) { %>

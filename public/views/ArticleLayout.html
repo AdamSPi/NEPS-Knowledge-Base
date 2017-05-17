@@ -5,16 +5,49 @@
 <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,800" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="../styles/style.css" />
-<link href="//cdn.quilljs.com/1.2.3/quill.snow.css" rel="stylesheet">
 <link rel="icon" href="../images/favicon.ico">
 
 <!-- Main Quill library -->
 <script src="//cdn.quilljs.com/1.2.3/quill.min.js"></script>
+<link href="//cdn.quilljs.com/1.2.3/quill.snow.css" rel="stylesheet">
+
+	<style>
+
+	#customer-app {
+			margin-bottom: 15px;
+	}
+
+	#customer-app > div > div > div {
+			font-family: 'Nunito', sans-serif !important;
+			font-weight: bold;
+			color: #a0a0a0 !important;
+			font-size: 14px !important;
+	}
+
+	#react-item {
+			font-family: 'Nunito', sans-serif !important;
+			font-weight: bold !important;
+			font-size: 13px !important;
+			color: #555 !important;
+	}
+	.sidebar {
+		position: relative;
+		left: 10px;
+		width: 28%;
+		float: right;
+		display: block;
+		padding-top: 0px !important;
+	}
+
+	.customer {
+		margin-top: 0px !important;
+	}
+
+	</style>
+
+
 
 <head>
-	<% if (data[0].Attachments !== null) { %>
-		<% var attached = attachment %>
-			<% } %>
 				<% data.forEach(function (Articles) { %>
 					<title>
 						<%=Articles.Title%>
@@ -54,11 +87,64 @@
 				<h2 id="post-title"><%=Articles.Title %></h2>
 				<div id="editFader"> <img src="../images/Edit.png" height="18" width="18"> </div>
 				<p class="post-meta">by
-					<%=Articles.User%> on
-						<%=Articles.Created %>
+					  <%- (Articles.User || '<font color="#AAA">anonymous</font>') %> on
+
+						<% function mod(n, m) { %>
+        			<% return ((n % m) + m) % m %>
+						<% } %>
+
+						<% var dateOnly = Articles.Time.split(' ')[0] %>
+						<% var yearFormat = dateOnly.split('/') %>
+						<% var yy =  yearFormat[2].substr(2, 2) %>
+						<% var finalDateString = yearFormat[0] +'/'+ yearFormat[1] +'/'+ yy %>
+						<% var AmOrPm = ' a.m' %>
+						<% var timeOnly = Articles.Time.split(' ')[1] %>
+						<% var timeFormat = timeOnly.split(':') %>
+            <% if(timeFormat[0] >= 0 && timeFormat[0] < 4){ %>
+              <% var date = parseInt(yearFormat[1])-1 %>
+              <% finalDateString = yearFormat[0] +'/'+ date +'/'+ yy %>
+              <% AmOrPm = ' p.m' %>
+            <% } %>
+						<%= finalDateString %> at
+
+
+						<% if (timeFormat[0]-4 > 12) { %>
+							<% AmOrPm = ' p.m'  } %>
+						<% var twelveHourFormat = mod(parseInt(timeFormat[0])-4, 12) %>
+						<% if (twelveHourFormat == 0 ) { %>
+							<%= "12:" + timeFormat[1] + AmOrPm %>
+						<% } else { %>
+							<%= twelveHourFormat + ':' + timeFormat[1] + AmOrPm %>
+						<% } %>
 				</p>
 				<p class="updated">
-					<font size="3">Updated on 'insert variable' </font>
+					<% if (Articles.Updated !== null ){ %>
+					<font size="2">Updated on
+						<% var dateOnly = Articles.Updated.split(' ')[0] %>
+						<% var yearFormat = dateOnly.split('/') %>
+						<% var yy =  yearFormat[2].substr(2, 2) %>
+						<% var finalDateString = yearFormat[0] +'/'+ yearFormat[1] +'/'+ yy %>
+						<% var AmOrPm = ' a.m'; %>
+						<% var timeOnly = Articles.Updated.split(' ')[1] %>
+						<% var timeFormat = timeOnly.split(':') %>
+            <% if(timeFormat[0] >= 0 && timeFormat[0] < 4){ %>
+              <% var date = parseInt(yearFormat[1])-1 %>
+              <% finalDateString = yearFormat[0] +'/'+ date +'/'+ yy %>
+              <% AmOrPm = ' p.m' %>
+            <% } %>
+						<%= finalDateString %> at
+
+
+						<% if (timeFormat[0]-4 > 12) { %>
+							<% AmOrPm = ' p.m'  } %>
+						<% var twelveHourFormat = mod(parseInt(timeFormat[0])-4, 12) %>
+						<% if (twelveHourFormat == 0 ) { %>
+							<%= "12:" + timeFormat[1] + AmOrPm %>
+						<% } else { %>
+							<%= twelveHourFormat + ':' + timeFormat[1] + AmOrPm %>
+						<% } %>
+					</font>
+					<% } %>
 				</p>
 
 				<h3 id="post-sym">Symptoms</h3>
@@ -66,9 +152,15 @@
 					<%=Articles.Symptoms %>
 				</div><br />
 
-				<h3 id="post-sum">Summary</h3>
+				<h3 id="post-sum">Solution Summary</h3>
 				<div class='summary'>
-					<%=Articles.Summary %>
+					<% if (Articles.Summary !== "n/a") { %>
+						<%= Articles.Summary %>
+					<% } else { %>
+					<div style="color: #AAA;">
+							<%= "This issue hasn't been solved yet..." %>
+					</div>
+					<% } %>
 				</div>
 
 				<br><br>
@@ -78,8 +170,6 @@
 					</div>
 					<%- Articles.Content %>
 				</div><br />
-
-				<p class="post-content">Insert post content variable tag here.</p>
 
 			</div>
 			<div class="com">
@@ -101,14 +191,15 @@
 
 
 		<div class="sidebar-post">
-			<h3 class="post-customer customer"><span class="entypo">,</span>Customer</h3>
+			<h3 class="layout-customer customer"><span class="entypo">,</span>Customer</h3>
 			<ul>
-				<li>
+				<li class="customer-field">
 					<% if (Articles.Customer !== "n/a") { %>
-						<%= Articles.Customer %>
+						<strong> <%= customerdata[0].Name %> </strong>
+						<input type="hidden" id="hidden-customer" value= <%= customerdata[0].ID %> />
 					<% } else { %>
-					<div style="color:#AAA">
-						<%= 'No customers' %>
+					<div id="no-customer">
+						<%= 'No customer' %>
 					</div>
 					<% } %>
 				</li>
@@ -117,7 +208,7 @@
 
 			<h3 class="tags"><span class="entypo">C</span>Tags</h3>
 
-			<ul class="tag-list">
+			<ul class="tag-list-non-edit">
 				<li>
 				<% if (Articles.Tags !== null) { %>
 					<% var tagArray = Articles.Tags.split(';') %>
@@ -127,37 +218,104 @@
 					</a>
 				 <%  }) %>
 			<% } else { %>
-					<div style="color:#AAA">
+					<div id="no-tags">
 						<%= 'No tags' %>
 					</div>
 				</li>
 			<% } %>
 			</ul>
 
-			<%  }) %>
 
-			<h3 class="attachments"><span class="entypo">'</span>Attachments</h3>
-			<ul>
+			<h3 class="attachments-non-edit"><span class="entypo">'</span>Attachments</h3>
+			<div class="attachment-list">
+				<div id="no-attach" style="margin-bottom: 5px;">
+					No attachments
+				</div>
+			</div>
+
+			<div class="add-attachment">
+					<a id="upload" class="add-attachment-link"> Add New... </a>
+					<input type="file" id="upload-input" name="uploads[]" multiple="multiple" />
+					<div id="progressBar"></div>
+			</div>
+
+			<h3 class="post-revisions"><span class="entypo">2</span>Previous Versions</h3>
+			<ul class="revision-list">
 				<li>
-					<div id="attach">
-						<ul>
-							<% if (data[0].Attachments !== null) { %>
-								<% attached.forEach(function(file){ %>
-									<li>>
-										<%= file.Name %>
-									</li <% }) %>
-									<% } %>
-						</ul>
+					<div id="no-revisions">
+						No revisions
 					</div>
-					<!-- id="upload" -->
 				</li>
 			</ul>
-			<input type="file" id="upload-input" name="uploads[]" multiple="multiple" />
-			<div id="progressBar"></div>
-
-
 		</div>
 
+
+
+		<div class="sidebar" style="display: none;">
+				<h3 class="post-customer customer"><span class="entypo">,</span>Customer</h3>
+				<input id="customer-input" type="hidden" name="customer" />
+				<div id="customer-app"></div>
+				<img class="customer-search_img" src="../images/search.ico" />
+
+				<ul>
+					<li class="customer-list">
+						<% if (Articles.Customer !== "n/a") { %>
+							<strong> <%= customerdata[0].Name %> </strong>
+							<input type="hidden" id="hidden-customer-id" value= <%= customerdata[0].ID %> />
+						<% } else { %>
+						<div id="no-customer">
+							<%= 'No customer' %>
+						</div>
+						<% } %>
+					</li>
+				</ul>
+
+				<div class="add-customer">
+					<a class="add-customer-link" href="/post-customer"> Add New... </a>
+				</div>
+
+				<h3 class="post-tags tags"><span class="entypo">C</span>Tags</h3>
+				<ul class="tag-list">
+					<li>
+					<% if (Articles.Tags !== null && Articles.Tags !== '') { %>
+						<div id="hidden-tag-ids" style="display: none;">
+							<%= Articles.Tags %>
+						</div>
+						<% var tagArray = Articles.Tags.split(';') %>
+						<% tagArray.forEach( function(tag) { %>
+						<a href="#">
+							<%= tag %>
+						</a>
+					 <%  }) %>
+				<% } else { %>
+						<div id="no-tag">
+							<%= 'No tags' %>
+						</div>
+					</li>
+				<% } %>
+				</ul>
+				<div class="add-tag">
+						<a class="add-tag-link"> Add New... </a>
+				</div>
+
+				<h3 class="post-attachments attachments"><span class="entypo">'</span>Attachments</h3>
+				<ul>
+					<li>
+						<div id="attach">
+							<ul class="attachment-list">
+										<li>
+											<div id="no-attach">
+												<%= "No attachments" %>
+											</div>
+										</li>
+							</ul>
+						</div>
+						<!-- id="upload" -->
+					</li>
+				</ul>
+		</div>
+
+		<%  }) %>
 
 	</div>
 
@@ -165,9 +323,12 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="../scripts/upload.js"></script>
+	<script src="../scripts/bundle-autocomplete-customer.js"></script>
+	<script src="../scripts/edit-customer.js"></script>
 	<script src="../scripts/revise.js"></script>
 	<script src="../scripts/comment.js"></script>
-
+	<script src="../scripts/tag.js"></script>
+	<script src="../scripts/download.js"></script>
 
 </body>
 

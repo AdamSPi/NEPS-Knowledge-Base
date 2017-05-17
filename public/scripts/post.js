@@ -32,7 +32,13 @@ $('#article_form').on('submit',function(e) {
           tagString += (trimmed + ';');
       }
   });
-  $('#tag-input').val(tagString);
+  if(!tagString){
+    $('#tag-input').val(null);
+  }
+  else
+  {
+    $('#tag-input').val(tagString.trim());
+  }
 
   if (!$("#customer-input").val()) {
     $("#customer-input").val("n/a");
@@ -43,13 +49,16 @@ $('#article_form').on('submit',function(e) {
   var html = $('.ql-editor').html();
   $('.secret-content').val(html);
 
-
+  if(!$('.secret-content').val() || !$('.title').val() || !$('.symptoms').val()){
+    return;
+  }
   var data = $("#article_form").serializeArray();
   socket.emit('send', data);
+  location.href = "/";
 });
 
 socket.on('receieved', function(data){
-  var url = ("/articles/"+data.Title+"?id="+data.ID).replace(/ /g,"-");
+  var url = ("/articles/"+data.Title.replace(/\?/g,"")+"?id="+data.ID).replace(/ /g,"-");
   // Redirect
   location.href = url;
 });

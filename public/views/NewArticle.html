@@ -15,6 +15,28 @@
 
     <link rel="stylesheet" href="../styles/style.css">
 
+    <style>
+
+    #customer-app {
+        margin-bottom: 15px;
+    }
+
+    #customer-app > div > div > div {
+        font-family: 'Nunito', sans-serif !important;
+        font-weight: bold;
+        color: #a0a0a0 !important;
+        font-size: 14px !important;
+    }
+
+    #react-item {
+        font-family: 'Nunito', sans-serif !important;
+        font-weight: bold !important;
+        font-size: 13px !important;
+        color: #555 !important;
+    }
+
+    </style>
+
     <title>New Article</title>
 
 </head>
@@ -53,13 +75,12 @@
 
                 <!-- action="/articles/post" method="post" -->
                 <label>Title</label>
-                <input type="text" class="form-control" name="title">
+                <input type="text" class="title form-control" name="title">
 
                 <label>Symptoms</label>
-                <input type="text" class="form-control" name="sym">
+                <input type="text" class="symptoms form-control" name="sym">
 
-                <label>Summary</label>
-                <textarea name="sum" class="form-control"></textarea>
+                <input type="hidden" name="sum" class="form-control"></textarea>
 
                 <label>Content</label>
                 <div class="content-editor"></div>
@@ -78,25 +99,49 @@
                     <button id="cancel" type="button" class="btn btn-default btn-secondary">Cancel</button>
                 </div>
 
-                <h3 class="customer"><span class="entypo">,</span>Customer</h3>
+                <h3 class="post-customer customer"><span class="entypo">,</span>Customer</h3>
+                <input id="customer-input" type="hidden" name="customer" />
+                <div id="customer-app"></div>
+          	    <img class="customer-search_img" src="../images/search.ico" />
+
+                <div class="def-header">
+                    Recent Customers
+                </div>
+                <ul class="default-customers">
+                  <% for(var i = 0; (i < 5) && (customerdata[i] !== undefined); i++){ %>
+                    <li>
+                      <a class="def-customer"> <%= customerdata[i].Name %> </a>
+                      <div style="display: none;">
+                        <%= customerdata[i].ID %>
+                      </div>
+                    </li>
+                  <% } %>
+                </ul>
+
+                <ul class="customer-list">
+                  <li id="no-customer">
+                      No Customer selected
+                  </li>
+                </ul>
                 <div class="add-customer">
-                    <input id="customer-input" type="hidden" name="customer" />
+                  <a class="add-customer-link" href="/post-customer"> Add New... </a>
                 </div>
 
                 <h3 class="post-tags tags"><span class="entypo">C</span>Tags</h3>
                 <ul class="tag-list">
                     <li id="no-tag">
-                        <font color="#a0a0a0" size="2"> No Tags </font>
+                      No Tags
                     </li>
                 </ul>
                 <div class="add-tag">
                     <a class="add-tag-link"> Add New... </a>
                 </div>
                 <input type="hidden" id="tag-input" name="tags" />
-                <h3 class="post-attachments attachments"><span class="entypo">v</span>Attachments</h3>
+
+                <h3 class="post-attachments attachments"><span class="entypo">'</span>Attachments</h3>
                 <ul class="attachment-list">
-                    <li>
-                        <font color="#a0a0a0" size="2"> No Attachments </font>
+                    <li id="no-attach">
+                      No Attachments
                     </li>
                 </ul>
                 <div class="add-attachment">
@@ -111,9 +156,10 @@
     </form>
 
     <script src="../scripts/tag.js"></script>
-    <script src="../scripts/pre-upload.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="../scripts/post.js"></script>
+    <script src="../scripts/bundle-autocomplete-customer.js"></script>
+    <script src="../scripts/add-customer.js"></script>
 
 </body>
 
